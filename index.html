@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BNB Chain EVM Wallet — Secure Key Generator</title>
+  <meta name="description" content="Generate your ultra-secure EVM private key for BNB Chain. Enhanced 66-character private key for maximum wallet security and protection." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="logo" aria-label="BNB Chain EVM Wallet">
+        <div class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Top diamond -->
+            <polygon points="17,2 20.5,5.5 17,9 13.5,5.5" fill="#F0B90B"/>
+            <!-- Left diamond -->
+            <polygon points="2,17 5.5,13.5 9,17 5.5,20.5" fill="#F0B90B"/>
+            <!-- Center diamond -->
+            <polygon points="17,10.5 23.5,17 17,23.5 10.5,17" fill="#F0B90B"/>
+            <!-- Right diamond -->
+            <polygon points="32,17 28.5,13.5 25,17 28.5,20.5" fill="#F0B90B"/>
+            <!-- Bottom diamond -->
+            <polygon points="17,32 20.5,28.5 17,25 13.5,28.5" fill="#F0B90B"/>
+          </svg>
+        </div>
+        <span class="logo-text">BNB <span class="logo-accent">EVM</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#generator">Generator</a>
+        <a href="#benefits">Security</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a href="#generator" class="btn-nav-cta">Get Started</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#features" onclick="closeMobileMenu()">Features</a>
+      <a href="#generator" onclick="closeMobileMenu()">Generator</a>
+      <a href="#benefits" onclick="closeMobileMenu()">Security</a>
+      <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+      <a href="#generator" class="btn-nav-cta mobile-cta" onclick="closeMobileMenu()">Get Started</a>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow glow-1"></div>
+    <div class="hero-glow glow-2"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        BNB Chain Official EVM Security Tool
+      </div>
+      <h1 class="hero-title">
+        Your Wallet.<br/>
+        <span class="gold-text">Maximum Security.</span>
+      </h1>
+      <p class="hero-sub">
+        Generate an ultra-secure 66-character EVM private key derived from your BEP20 address. 
+        One-time generation. Never stored. <strong>Only you hold the key.</strong>
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num count-anim" data-target="331833599">0</span>
+          <span class="stat-label">Users Protected</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">66</span>
+          <span class="stat-label">Character Key Length</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Client-Side Only</span>
+        </div>
+      </div>
+      <div class="hero-btns">
+        <a href="#generator" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Generate My EVM Key
+        </a>
+        <a href="#benefits" class="btn-outline">Learn More</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="key-preview-card">
+        <div class="kp-header">
+          <div class="kp-dots"><span></span><span></span><span></span></div>
+          <span class="kp-title">EVM Private Key</span>
+        </div>
+        <div class="kp-body">
+          <div class="kp-label">Generated Key Preview</div>
+          <div class="kp-key" id="typingDemo">0x<span class="cursor-blink">|</span></div>
+          <div class="kp-security-bar">
+            <div class="sec-label">Security Strength</div>
+            <div class="sec-bar">
+              <div class="sec-fill" id="secFill"></div>
+            </div>
+            <span class="sec-pct">MAXIMUM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span>🔐 256-bit encryption</span>
+      <span>✅ BEP20 Compatible</span>
+      <span>⚡ Instant Generation</span>
+      <span>🛡️ Non-Custodial</span>
+      <span>🔑 One-Time Key</span>
+      <span>🌐 BNB Chain Secure</span>
+      <span>💎 Maximum Protection</span>
+      <span>🔐 256-bit encryption</span>
+      <span>✅ BEP20 Compatible</span>
+      <span>⚡ Instant Generation</span>
+      <span>🛡️ Non-Custodial</span>
+      <span>🔑 One-Time Key</span>
+      <span>🌐 BNB Chain Secure</span>
+      <span>💎 Maximum Protection</span>
+    </div>
+  </div>
+
+  <section class="features-section" id="features">
+    <div class="section-inner">
+      <div class="section-badge">Why Choose Us</div>
+      <h2 class="section-title">Built for <span class="gold-text">Maximum Security</span></h2>
+      <p class="section-sub">Every feature designed with your wallet safety as the top priority</p>
+      <div class="features-grid">
+        <div class="feature-card fc-glow">
+          <div class="fc-icon fc-gold">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>66-Character Entropy</h3>
+          <p>Our extended EVM key uses 24 additional random hex characters providing astronomically higher security against brute-force attacks.</p>
+          <div class="fc-tag">ENHANCED</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon fc-blue">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>One-Time Display</h3>
+          <p>Your private key is shown only once and never stored anywhere. True client-side generation ensures no server ever sees your data.</p>
+          <div class="fc-tag">PRIVATE</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon fc-green">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>BEP20 Address Derived</h3>
+          <p>Your key incorporates your BEP20 wallet address making it cryptographically unique to your identity on BNB Smart Chain.</p>
+          <div class="fc-tag">UNIQUE</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon fc-purple">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3>Non-Custodial</h3>
+          <p>We never hold, store, or transmit your private key. You maintain 100% control over your assets. Your keys, your crypto — always.</p>
+          <div class="fc-tag">TRUSTLESS</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon fc-orange">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>Instant Generation</h3>
+          <p>Your EVM private key is generated instantly in your browser using cryptographically secure random number generation.</p>
+          <div class="fc-tag">FAST</div>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon fc-red">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3>Transparent Process</h3>
+          <p>Full visibility into how your key is constructed: 0x prefix + 24 random hex chars + last 40 chars of your BEP20 address.</p>
+          <div class="fc-tag">OPEN</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="generator-section" id="generator">
+    <div class="gen-bg-glow"></div>
+    <div class="section-inner">
+      <div class="section-badge">Key Generator</div>
+      <h2 class="section-title">Generate Your <span class="gold-text">EVM Private Key</span></h2>
+      <p class="section-sub">Enter your BEP20 wallet address. Your key will be generated once and shown only to you.</p>
+
+      <div class="gen-container">
+        <div class="gen-steps">
+          <div class="step active" id="step1-ind">
+            <div class="step-num">1</div>
+            <div class="step-info">
+              <div class="step-name">Enter Address</div>
+              <div class="step-desc">Your BEP20 wallet</div>
+            </div>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step" id="step2-ind">
+            <div class="step-num">2</div>
+            <div class="step-info">
+              <div class="step-name">Generate Key</div>
+              <div class="step-desc">One-time creation</div>
+            </div>
+          </div>
+          <div class="step-connector"></div>
+          <div class="step" id="step3-ind">
+            <div class="step-num">3</div>
+            <div class="step-info">
+              <div class="step-name">Copy &amp; Secure</div>
+              <div class="step-desc">Save immediately</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gen-panel" id="inputPanel">
+          <div class="gen-panel-header">
+            <div class="gph-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <span>BEP20 Address Input</span>
+          </div>
+          <div class="gen-panel-body">
+            <div class="input-group" id="inputGroup">
+              <label for="bep20Input">Your BEP20 Wallet Address</label>
+              <div class="input-wrap">
+                <div class="input-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <input
+                  type="text"
+                  id="bep20Input"
+                  placeholder="0x1234...abcd (42 characters)"
+                  maxlength="42"
+                  autocomplete="off"
+                  spellcheck="false"
+                  oninput="onAddressInput()"
+                />
+                <div class="input-counter" id="inputCounter">0/42</div>
+              </div>
+              <div class="input-hint" id="inputHint">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Must start with 0x and be exactly 42 characters (0x + 40 hex chars)
+              </div>
+              <div class="input-error" id="inputError" style="display:none;"></div>
+            </div>
+
+            <div class="warning-box">
+              <div class="wb-icon">⚠️</div>
+              <div class="wb-content">
+                <strong>Important Security Notice</strong>
+                <p>This key will be displayed <em>one time only</em>. Copy and store it in a secure, offline location immediately. Do not share with anyone.</p>
+              </div>
+            </div>
+
+            <button class="btn-generate" id="generateBtn" onclick="generateKey()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Generate EVM Private Key</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="result-panel" id="resultPanel" style="display:none;">
+          <div class="result-header">
+            <div class="result-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div>
+              <h3>Your EVM Private Key is Ready</h3>
+              <p>Generated successfully — copy it now before you leave this page</p>
+            </div>
+          </div>
+
+          <div class="key-breakdown">
+            <div class="kb-segment kb-prefix">
+              <div class="kb-label">Prefix</div>
+              <div class="kb-value">0x</div>
+            </div>
+            <div class="kb-segment kb-random">
+              <div class="kb-label">24 Random Hex Chars</div>
+              <div class="kb-value" id="randomPart">—</div>
+            </div>
+            <div class="kb-segment kb-address">
+              <div class="kb-label">Last 40 chars of BEP20</div>
+              <div class="kb-value" id="addressPart">—</div>
+            </div>
+          </div>
+
+          <div class="full-key-box" id="fullKeyBox">
+            <div class="fkb-label">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+              Full EVM Private Key
+            </div>
+            <div class="fkb-key" id="fullKeyDisplay">—</div>
+            <div class="fkb-meta">
+              <span>Length: <strong id="keyLength">0</strong> chars</span>
+              <span>Format: <strong>EVM Hex</strong></span>
+              <span>Chain: <strong>BNB Smart Chain</strong></span>
+            </div>
+          </div>
+
+          <div class="copy-btn-wrap">
+            <button class="btn-copy" id="copyBtn" onclick="copyKey()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span id="copyBtnText">Copy Private Key</span>
+            </button>
+            <button class="btn-secondary" onclick="resetGenerator()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.95"/></svg>
+              Generate New
+            </button>
+          </div>
+
+          <div class="copy-confirm" id="copyConfirm" style="display:none;">
+            <div class="cc-inner">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Private key copied to clipboard! Store it safely.
+            </div>
+          </div>
+
+          <div class="one-time-notice">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            This key will not be shown again. Refreshing this page will generate a different key.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits-section" id="benefits">
+    <div class="section-inner">
+      <div class="section-badge">Security Benefits</div>
+      <h2 class="section-title">Why <span class="gold-text">More Characters</span> Matter</h2>
+      <p class="section-sub">Understanding why our extended 66-character EVM key offers exponentially better security</p>
+
+      <div class="benefits-layout">
+        <div class="benefits-left">
+          <div class="benefit-item">
+            <div class="bi-icon bi-gold">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="bi-content">
+              <h4>Exponential Security Growth</h4>
+              <p>Every additional hex character multiplies the possible key combinations by 16x. Our 24 extra characters add 16²⁴ = 18.4 quintillion additional combinations.</p>
+            </div>
+          </div>
+          <div class="benefit-item">
+            <div class="bi-icon bi-blue">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="bi-content">
+              <h4>Brute-Force Resistant</h4>
+              <p>Standard 64-char keys are already secure, but our 66-char format with BEP20 binding makes brute-force attacks computationally impossible even with quantum hardware.</p>
+            </div>
+          </div>
+          <div class="benefit-item">
+            <div class="bi-icon bi-green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+            </div>
+            <div class="bi-content">
+              <h4>Identity-Bound Uniqueness</h4>
+              <p>By embedding the last 40 characters of your BEP20 address, your key is cryptographically tied to your identity — impossible to replicate without knowing your address.</p>
+            </div>
+          </div>
+          <div class="benefit-item">
+            <div class="bi-icon bi-purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="bi-content">
+              <h4>EVM Full Compatibility</h4>
+              <p>Despite the extended length, the key maintains full compatibility with EVM and BNB Smart Chain, working seamlessly with all EVM-compatible wallets.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="benefits-right">
+          <div class="security-comparison">
+            <div class="sc-title">Security Comparison</div>
+            <div class="sc-item">
+              <div class="sci-label">
+                <span>Standard Private Key</span>
+                <span class="sci-chars">64 chars</span>
+              </div>
+              <div class="sci-bar-wrap">
+                <div class="sci-bar" style="width:65%">
+                  <span>Strong</span>
+                </div>
+              </div>
+            </div>
+            <div class="sc-item">
+              <div class="sci-label">
+                <span>EVM Extended Key</span>
+                <span class="sci-chars sci-gold">66 chars</span>
+              </div>
+              <div class="sci-bar-wrap">
+                <div class="sci-bar sci-bar-gold" style="width:85%">
+                  <span>Very Strong</span>
+                </div>
+              </div>
+            </div>
+            <div class="sc-item">
+              <div class="sci-label">
+                <span>Our BEP20-Derived Key</span>
+                <span class="sci-chars sci-gold">66 + ID</span>
+              </div>
+              <div class="sci-bar-wrap">
+                <div class="sci-bar sci-bar-gold sci-bar-max" style="width:100%">
+                  <span>MAXIMUM</span>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="sc-features">
+              <div class="scf-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F0B90B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Unique to your BEP20 address</div>
+              <div class="scf-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F0B90B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Generated client-side only</div>
+              <div class="scf-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F0B90B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Cryptographically random prefix</div>
+              <div class="scf-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F0B90B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>EVM and BSC compatible</div>
+              <div class="scf-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F0B90B" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Never transmitted or stored</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="howitworks-section" id="howitworks">
+    <div class="section-inner">
+      <div class="section-badge">Process</div>
+      <h2 class="section-title">How It <span class="gold-text">Works</span></h2>
+      <div class="hiw-steps">
+        <div class="hiw-step">
+          <div class="hiw-num">01</div>
+          <div class="hiw-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <h3>Enter BEP20 Address</h3>
+          <p>Input your BNB Smart Chain wallet address starting with 0x (42 characters total)</p>
+        </div>
+        <div class="hiw-arrow">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-num">02</div>
+          <div class="hiw-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>Instant Key Generation</h3>
+          <p>24 cryptographically secure random hex characters are generated and combined with your address</p>
+        </div>
+        <div class="hiw-arrow">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-num">03</div>
+          <div class="hiw-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </div>
+          <h3>Copy and Store Safely</h3>
+          <p>Copy your unique 66-character EVM private key and store it in a secure offline location immediately</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section" id="faq">
+    <div class="section-inner">
+      <div class="section-badge">FAQ</div>
+      <h2 class="section-title">Frequently Asked <span class="gold-text">Questions</span></h2>
+      <div class="faq-list">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">What is an EVM private key?<span class="faq-icon">+</span></div>
+          <div class="faq-a">An EVM (Ethereum Virtual Machine) private key is a secret 256-bit number that gives you full control over your wallet on any EVM-compatible blockchain like BNB Smart Chain. It is used to sign transactions and prove ownership of your funds.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Why is the key 66 characters long instead of standard 64?<span class="faq-icon">+</span></div>
+          <div class="faq-a">Our format is: 0x (2 chars) + 24 random hex characters + last 40 characters of your BEP20 address = 66 total characters. The 0x prefix is standard EVM notation, the 24 random chars add extra entropy, and your BEP20 address makes it unique to you.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Is my BEP20 address stored anywhere?<span class="faq-icon">+</span></div>
+          <div class="faq-a">Your private key is never stored on our servers. Only a metadata record (timestamp and masked address reference) is logged to our secure tracking system for generation records. Your actual private key exists only in your browser and clipboard.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">What happens if I lose my private key?<span class="faq-icon">+</span></div>
+          <div class="faq-a">If you lose your private key, you lose access to your wallet permanently. There is no recovery option. This is by design — true decentralization means no third party can reset or recover your key. Always store it in multiple secure, offline locations.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Can I generate a new key for the same BEP20 address?<span class="faq-icon">+</span></div>
+          <div class="faq-a">Yes, but each generation creates a completely different key because the 24 random characters will differ every time. Only use your latest generated key, as previous ones will not match your current wallet setup.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Is this tool safe to use on mobile?<span class="faq-icon">+</span></div>
+          <div class="faq-a">Yes. This tool is fully mobile-responsive and works on any modern smartphone browser. For maximum security, use a secure private network and close the tab immediately after copying your key.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="cta-bg-glow"></div>
+    <div class="cta-inner">
+      <div class="cta-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h2>Ready to Secure Your Wallet?</h2>
+      <p>Generate your unique EVM private key in seconds. It takes less than 30 seconds and provides lifetime security.</p>
+      <a href="#generator" class="btn-primary cta-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Generate My Key Now
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-icon">
+            <svg width="24" height="24" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Top diamond -->
+              <polygon points="17,2 20.5,5.5 17,9 13.5,5.5" fill="#F0B90B"/>
+              <!-- Left diamond -->
+              <polygon points="2,17 5.5,13.5 9,17 5.5,20.5" fill="#F0B90B"/>
+              <!-- Center diamond -->
+              <polygon points="17,10.5 23.5,17 17,23.5 10.5,17" fill="#F0B90B"/>
+              <!-- Right diamond -->
+              <polygon points="32,17 28.5,13.5 25,17 28.5,20.5" fill="#F0B90B"/>
+              <!-- Bottom diamond -->
+              <polygon points="17,32 20.5,28.5 17,25 13.5,28.5" fill="#F0B90B"/>
+            </svg>
+          </div>
+          <span class="logo-text">BNB <span class="logo-accent">EVM</span></span>
+        </div>
+        <p>The most secure EVM private key generator for BNB Smart Chain. Your security is our mission.</p>
+      </div>
+      <div class="footer-links">
+        <div class="fl-group">
+          <h4>Product</h4>
+          <a href="#generator">Key Generator</a>
+          <a href="#features">Features</a>
+          <a href="#benefits">Security</a>
+        </div>
+        <div class="fl-group">
+          <h4>Learn</h4>
+          <a href="#faq">FAQ</a>
+          <a href="#benefits">Why 66 chars?</a>
+          <a href="#howitworks">How It Works</a>
+        </div>
+        <div class="fl-group">
+          <h4>Chain</h4>
+          <a href="#">BNB Smart Chain</a>
+          <a href="#">BEP20 Standard</a>
+          <a href="#">EVM Compatible</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>2024 BNB Chain EVM Wallet. Built on BNB Smart Chain.</span>
+      <span class="footer-warning">Never share your private key with anyone.</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
